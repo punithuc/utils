@@ -1,0 +1,34 @@
+#!/bin/sh
+#Shell script to create cscope.files as .x is not recognised by cscope by default and then cscope into the files
+#Condition checks to see if the directory to search into is entered and if cscope.files file is already present 
+
+if test $# -eq 1
+then
+DIR=$1
+else
+echo "Cscope for current directory"
+DIR="."
+fi
+
+if test -d $DIR
+then
+if test -e cscope.files
+then
+echo "cscope.files is already present!!"
+rm -rf cscope.files
+find $DIR -name *.x >>cscope.files
+find $DIR -name *.h >>cscope.files
+find $DIR -name *.c >>cscope.files 
+find $DIR -name *.cpp >>cscope.files 
+cscope -b -R
+else
+find $DIR -name *.x >>cscope.files
+find $DIR -name *.h >>cscope.files
+find $DIR -name *.c >>cscope.files 
+find $DIR -name *.cpp >>cscope.files 
+cscope -b -R
+#cscope -R 
+fi
+else
+echo "Enter valid directory!!"
+fi

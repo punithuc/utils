@@ -1,0 +1,3 @@
+#!/bin/sh
+$PUNITH_HOME/punith_utils/cscope_tags/mytags
+$PUNITH_HOME/punith_utils/cscope_tags/mycscope $1

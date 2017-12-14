@@ -1,0 +1,81 @@
+
+#alias vi='\vi'
+#alias vim='gvim'
+alias g++='g++ -std=c++11'
+
+# xterm aliases
+
+alias xt='xterm -bg black -fg white -sb -sl 5000 -title "$me @ `hostname`" -ls &'
+alias xtp='xterm -bg peachpuff -fg black -sb -sl 5000 -title "$me @ `hostname`" -ls &'
+alias xtl='xterm -bg lightyellow -fg black -sb -sl 5000 -title "$me @ `hostname`" -ls &'
+alias xt7='xterm -bg black -fg white -sb -sl 5000 -fn 7x14 -title "$me @ `hostname`" -ls &'
+alias xt8='xterm -bg black -fg white -sb -sl 5000 -fn 8x16 -title "$me @ `hostname`" -ls &'
+
+# cleartool aliases /usr/atria/bin/cleartool
+alias ct='cleartool'
+alias ci='cleartool ci '
+alias lsco='cleartool lsco -cview -avobs'
+alias myviews='cleartool lsview | grep pchowdap'
+alias pwv="ct pwv"
+alias cu="ct update"
+alias co="ct co"
+alias ctprint='ct findmerge . -fversion .../cygnus_eNB_rel_1.0_dev/LATEST -c "Merge from Punith" -log /dev/null -print'
+alias ctgmerge='ct findmerge . -fversion .../cygnus_eNB_rel_1.0_dev/LATEST -c "Merge from Punith" -log /dev/null -merge -gmerge'
+alias ctlsco='ct lsco -recurse -me'
+alias ctcimerge='ct ci -nc `ctlsco | cut -d "\"" -f 2`'
+alias ctlsv='ct lsview | grep pchowdap'
+alias cdvob='cd /vobs/core_prd/gprs/enbapp/src/build'
+alias ctcs='cleartool catcs'
+
+
+# alias gdb='/usr/ccpu/gnutools/gdb/linux/32bit/gdb-6.6/bin/gdb'
+alias fhf='find ./ -name "*.h" | xargs grep'
+alias fxf='find ./ -name "*.x" | xargs grep'
+alias fcf='find ./ -name "*.c" | xargs grep'
+alias faf='find ./ -name "*.[hcx]" | xargs grep'
+
+# list aliases
+if [ `uname -s` == Linux ]; then
+    alias ls='ls --color=auto'
+fi
+alias l="ls -ltr"
+alias ll="ls -l"
+
+# tags aliases
+alias ctags='ctags --language-force=c --c-types=+cdefgmnstuv --sort=foldcase'
+alias tags="ctags -R --language-force=C -h \".h.H.hh.hpp.hxx.h++.inc.def.x\""
+alias rmtags="rm -rf tags cscope.*"
+alias cstags="myrefs ."
+alias newtags="rmtags; myrefs ."
+
+# SSH aliases
+alias sshbharma="ssh pchowdappa@bharma"
+alias sshpruthvi="ssh pchowdappa@pruthvi"
+alias sshvmlinux="ssh punith@172.24.5.134"
+
+# SSH aliases
+alias sftpbharma="sftp pchowdappa@bharma"
+alias sftppruthvi="sftp pchowdappa@pruthvi"
+alias sftpvmlinux="sftp punith@172.24.5.134"
+
+
+# DHCP aliases
+alias dhclient="sudo dhclient eth0"
+
+# VNC aliases
+alias vnc='vncserver -geometry 1270x957 -depth 24 '
+
+# Cygnus make
+alias mkcyg='make BUILD_CYGNUS_APP=0 2>err; vim err'
+alias clcyg='make BUILD_CYGNUS_APP=0 clean'
+alias diffcyg='diff -r -x obj -x "*.tmp" -x "*.contrib*" '
+
+alias sc='screen -rD punith'
+
+alias enbmk='cd enbapp/build; make t2k_int 2>../../err; cd -'
+alias enbclean='cd enbapp/build; make t2k_clean 2>../../err; cd -'
+alias iamk='cd enbapp/build; make ia_int 2>../../err; cd -'
+alias iaclean='cd enbapp/build;  make ia_rrm_clean; make ia_clean; rm -rf libs/* ; cd -'
+
+alias vi='/usr/bin/vim "+source $PUNITH_HOME/punith_utils/vimrc_noindent"'
+alias vim='/usr/bin/vim "+source $PUNITH_HOME/punith_utils/vimrc_noindent"'

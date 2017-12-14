@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ $# -eq 1 ]
+then
+    DIR=$1
+
+    find . -type d -name "$DIR" | more
+    echo ""
+    echo ""
+    echo "Delete all the $DIR direcrories [y/n] : "
+    read OPTION
+    echo ""
+    case $OPTION in
+            [yY] | [yY][eE][sS])
+            find . -type d -name "$DIR" -exec rm -rf {} \;
+    esac
+else
+    echo "----------------------------------------------------------"
+    echo "                         Usage                            "
+    echo "   deldirs '<dir>'                                        "
+    echo "----------------------------------------------------------"
+fi

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+if [ $# -eq 3 ]
+then
+    FILE=$1
+    OLDNAME=$2
+    NEWNAME=$3
+    FIND_STRING="$FILE"
+    REPLACE_STRING="s/$OLDNAME/$NEWNAME/g"
+
+    find . -name "$FIND_STRING" -exec grep -nr $OLDNAME {} \; | more
+    echo ""
+    echo ""
+    echo "Replace all \"$2\" with \"$3\" in \"$1\" file/files [y/n] : "
+    read OPTION
+    echo ""
+    case $OPTION in
+            [yY] | [yY][eE][sS])
+            find . -name "$FILE" | xargs perl -pi -e $REPLACE_STRING
+    esac
+else
+    echo "----------------------------------------------------------"
+    echo "                         Usage                            "
+    echo "replace '<files>' <old_name> <new_name>                   "
+    echo "----------------------------------------------------------"
+fi

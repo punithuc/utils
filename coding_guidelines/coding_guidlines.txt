@@ -1,0 +1,316 @@
+/*******************************************************************************
+ * Copyright    :
+ ******************************************************************************/
+
+/***********************************************************************
+ * File                 : 
+ * Module               : 
+ * Description          : 
+ *               
+ * Author               : 
+ *
+ * Revision History     : $Id: $
+ * Initial release      :
+ * Bug Number           :
+ * Fixed by             :
+ * Change in File       :
+ ***********************************************************************/
+
+File         : <Give the File name,as decided by naming convention>
+Module       : <Give the Module Name: Full name (Acronym)>
+Description  : <Give the description, based on the functions 
+                grouped in this files>
+Author       : <Give 3 letter initials of the Author>
+        {Don't edit the Revision History line. Will be done by CVS} 
+Revision History  :$Id$ 
+Initial release   : <These are to be used only after Release>
+Bug Number        :
+Fixed by          :
+Change in File    :
+
+                ==================== OR ======================
+    PREFERED
+/****************************************************************************
+ * Company                      : 
+ * File                         : 
+ * Author                       :
+ * Version                      :
+ * Date                         :
+ * Operating Environment        : 
+ * Compiler with Version Number : 
+ * Description                  :
+ * Revisers Name                :
+ * Date                         :
+ * CustomerBug No./CMF No.      :
+ * Brief description of the fix/enhancement :
+ * 
+ ****************************************************************************/
+
+Description: High level description of the file or Class
+
+--------------------------------- Source Files -------------------------------
+
+Definition of Global Variables/Constants :
+Organize files such that they have a top down structure.
+
+/*
+ * Put the include files required
+ */
+<System Includes >
+<Library Includes >
+"User Includes :"
+
+/*
+ * #defines and macros used in this file.
+ */
+
+/*
+ * Typedefs whose scope is limited to this file.
+ */
+
+/*
+ * Put all the prototypes for the functions defined in this file
+ */
+
+/*
+ * Variable declarations global to this file only.
+ */
+
+  b).    System Includes
+  c).    User Includes
+          1). Don't use absolute path
+          2). Set appropriate path in the development environment
+          3). Use always relative path.
+  d).    Type definitions and Constants in the following sequence order
+          1). Constant macros 
+          2). Function macros
+          3). typedefs
+          4). enums
+  e).    Definition of global Variables in the following sequence order
+          1). Global External Data Declaration
+          2). Static globals 
+  f).    Extern function prototypes
+  g).    Static function prototypes
+  h).    function prototypes
+  i).    function definition
+         1).If a function scope exist for this particular function make it
+static.
+  j).    An end of file comment    
+
+  k).    Function Declarations should be in the following sequence order
+
+Functions:
+/***********************************************************************
+ * Function Name        :
+ * Return Values        :
+ * Global variables     :
+ * of the <SUB-MODULE>
+ * Global variables     : 
+ * of <MODULE>  
+ * Global variables     :
+ * of <PRODUCT> 
+ * Description          :
+ ***********************************************************************/
+Function Name      : <Give the function name>
+Return Values      : <Give the Return values>
+Global variables   : <Give globals accessed specific to this sub-module>
+                        of the <SUB-MODULE>
+Global variables   : <Give globals accessed specific to the module>
+                        of <MODULE>  
+Global variables   : <Give globals accessed specific to product>
+                        of <PRODUCT> 
+Description        : <Give brief description of the function>
+
+        ==================== OR ======================
+
+/*****************************************************************************
+ * Function Name                :
+ * Description                  : 
+ * Parameters                   :
+ * Called functions             : 
+ * Global Data                  : 
+ * Return Value                 : 
+ * Exceptions                   :
+ *****************************************************************************/
+
+Description : Briefly describe what the function does
+Parameters  : List all function parameters and provide a description of each 
+                parameter along with the type of the parameter. (A table with 
+                parameter Name, Description, And Type may be created for clarity.)
+                If the function has no parameters, state "none"
+Called functions : Mention all the funtions called
+Global Data :   List any global data that the function references or modifies.
+                Also describe any global data manipulated through pointers.
+Return Value : Describe the function return value. If the function doesn.t
+                return a value, state "none".
+Exceptions  : Describe all exception(s) thrown by this function that must be
+                handled by other functions, and explain the conditions causing 
+                the exception(s) to be thrown.
+
+
+/* Bug reported By CstomerName/Organization Name on Date :
+/* Original source code commented out - Do not delete the original source code
+ * */
+/*
+*
+*
+*/
+/* Begin : Fixed code - TEL */
+Fixed source Code
+/* End : Fixed code - TEL */
+
+
+
+--------------------------------- Header Files -------------------------------
+#ifndef FILENAME_H
+#define FILENAME_H
+
+<System Includes >
+<Library Includes >
+"User Includes :"
+
+
+Type Definition/Class Definition
+Extern declarations 
+Declaration of Global Variables/Constants, Macros :
+
+#endif 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~ MAKEFILE FORMAT ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+/****************************************************************************
+ * Company                      : 
+ * File                         : 
+ * Author                       :
+ * Version                      :
+ * Date                         :
+ * Operating Environment        : 
+ * Compiler with Version No.    : 
+ * Order of Execution of files  : (e.g.  *.obj)
+ * Executable  (*.exe)          : (file created by the makefile)
+ *****************************************************************************/
+
+
+
+/* Note: Hungarian Notation shall be followed, while naming the 
+    variables and functions */
+
+/* Usage of data types */ 
+typedef unsigned char     uint8;
+typedef char              int8;
+typedef short             int16;
+typedef unsigned  short   uint16;
+typedef int           int32;
+typedef unsigned int      uint32;
+typedef unsigned long     uint64;
+typedef signed long       int64;
+
+
+/* Usage of variable names */ 
+/* Note: Initialize all varaibles appropriately */
+uint8       uchVariableName; 
+int8        chVariableName;
+uint16      unVariableName;
+int16       nVariableName;
+uint32      uiVariableName;
+int32       iVariableName;
+uint64      ulVariableName;
+int64       lVariableName;
+
+/* Usage of boolean varaible */
+tca_boolean  bVariableName = TCA_FALSE; /* Initialize either to TRUE or FALSE
+*/
+
+
+/* Usage of pointers */
+/* Note: Initialize all pointer variables to NULL */
+int8*       pchVariableName = NULL /* character pointer*/
+int32*      piVariableName = NULL: /* integer pointer*/
+
+/* Usage of double pointers */
+int32**     ppiVariableName = NULL:
+
+/* Usage of void  pointers */
+void*       pvVariableName = NULL:
+
+
+/* Usage of typedef for user defined data types */
+typedef   int   UserDataType; 
+
+
+/* Usage of arrays */
+int8   achName[MAX_SIZE]; /* character array */
+uint8  auchName[MAX_SIZE]; /* unsigned charater array */
+int32  aiName[MAX_SIZE]; /* integer array */
+
+
+/* global variable declarations */
+int8        gchVariableName;
+uint32      guiVariableName;
+int32*      gpiVariableName;
+
+
+
+
+/* enum instance */
+MediaType  eMediaType;
+
+ + Avoid variable names starting or ending with "_" for all structures names
+and Variables.
+
+/* structure instance */
+CallInfo  sCallInfo;
+
+/* Pointer to a structure */
+CallInfo*  psCallInfo;
+
+
+/* Usage of global array of structure pointers */
+CallInfo*  gapsCallInfo[MAX_SIZE];
+
+     + Typedef all struct definitions.
+     + Typedeffed names should have "_t" appended to their name.
+
+
+TIP :   Don't give more than one space between structure type and structure
+name.
+Have a short comment for important fields.
+
+
+/* Sample variable name */
+int8   chVariableName;
+
+----        Usage of comments   ------
+1)Please use the following syntax for comments, when comment is above the c
+statement
+    
+    /*
+     * your commnets
+     */
+     for (iCount=0; iCount<10; iCount++)
+
+OR
+    
+     while (condition)   /* your commnets */
+     {
+    
+     }
+
+2) At the end of each condition /loop, there shall be a comment 
+   indicating end of loop or a condition
+
+   if (condition)
+   {
+
+   } /* end of if (condition) */
+    
+   for (iCount=0; iCount<10; iCount++)
+   {
+
+   } /* end of for (iCount=0; iCount<10; iCount++) */
+
+
+/************************* End of File xxxxxxx.x ****************************/
+
+

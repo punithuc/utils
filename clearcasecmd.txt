@@ -1,0 +1,114 @@
+element * CHECKEDOUT
+element * .../rce_sumitomo_dev/LATEST
+element * .../sumitomo_rel_1_0/LATEST -mkbranch rce_sumitomo_dev
+element * /main/LATEST -mkbranch sumitomo_rel_1_0
+
+load /vobs/ps_prd/9000260
+
+- How to create a view
+cleartool mkview -tag <view name> -stgloc -auto
+- How to create a new clearcase file
+  Checkout the directory in which file has to be added
+  cp the file in the directory
+  ct mkelem -ci -c "comment" filename
+- How to create Directory
+ct mkdir tools
+
+- How to create snapshot view
+   cleartool mkview -snapshot -tag <view_name> -stgloc -auto <view_name>
+   cd $HOME/<view_name> 
+   ct edcs -tag <view_name>
+- How to update snapshort view
+   clearviewupdate
+   ct update
+ 
+- How to create label
+ct mklbtype -c "Version label for GMM quality upgrade" GMM_REL_2.1_MNT_BASE
+ct mklbtype -c "Version label for GMM quality upgrade" VALIDATED
+
+- How to apply label
+ct mklabel -recurse GMM_REL_2.1_MNT_BASE .
+ct mklabel -recurse VALIDATED .
+
+- How to merge a branch in the Integrator's view
+ct findmerge . -fversion .../rce_comviva_rel_1_0/LATEST -c "Merging from RCE
+Branch" -merge -gmerge
+
+ct findmerge . -fversion .../shashikant_3gpprrc_rel_2.0_dev/LATEST -c "mergine
+froms shashikant branch" -merge -gmerge
+
+- How to create a label
+ct mklbtype -c "Creating base label for RRC" RRC_REL_2.0_BASE
+ct lstype -kind lbtype  | grep RRC_REL_2.0_BASE
+
+- How to run findmerge
+ct findmerge . -fversion .../mraj_3gpprrc_rel_2.0_dev -c "Weekly Integration for RRC" -merge -gmerge
+
+ct findmerge . -fversion .../chebli_3gpprrc_rel_2.0_dev -c "Weekly Integration for RRC" -merge -gmerge
+
+ct findmerge . -fversion .../suyash_3gpprrc_rel_2.0_dev -c "Weekly Integration for RRC" -merge -gmerge
+
+ct findmerge . -fversion .../3gpprrc_rel_2.0_dev -c "Weekly Integration for RRC" -merge -gmerge
+
+ct findmerge . -fversion .../3gpprrc_rel_2.1_dev -c "Weekly Integration for RRC" -merge -gmerge
+
+ct findmerge . -fversion .../ravi_3gpprrc_rel_2.0_dev -c "Weekly Integration for RRC" -merge -gmerge
+
+#How to apply label
+ct maklabel -replace -recur <label name> .
+ct mklabel -replace -recur RRC_REL_2.0_BASE .
+
+#How to build XTA code
+make -f rr.mak   acc2 BLDENV=lnx_acc2 2>log
+
+#See all the checkedout files in the clearcase view
+ct lsco -avobs -cview
+
+#How to checkin files
+ct lsco -r -me | cut -f2  -d"\""
+
+#How to checkin files
+ct ci -c "Meger from Suyash branch done" `ct lsco -r -me | cut -f2  -d"\""`
+
+
+#how to build XTA
+source ~/uday/.pythonrc
+
+#Create a branch
+ct mkbrtype -c "Creating branch for LDF GMM-SM" ldf__rel_1.1_mnt
+
+
+#How to rename a label
+ct rename lbtype:VALIDATED VALIDATED_20July07
+ct rename lbtype:VALIDATED VALIDATED_20July07_1
+ct rename lbtype:VALIDATED VALIDATED_25July07_1
+
+
+#Find all the elements having this label
+ct find . -version "lbtype(VALIDATED)" -print
+
+#steps for moving VALIDATED
+ct rename lbtype:VALIDATED VALIDATED_07Aug07_1
+cd /vobs/admin
+ct mklbtype -c "Version label for RRC" VALIDATED
+ct mklabel -recurse VALIDATED .
+
+#Print private files
+ct lsprivate
+
+Merging to <private branch> branch:
+    element * CHECKEDOUT
+    element * .../<private branch>/LATEST
+    mkbranch <private branch>
+    element * .../release1/LATEST
+    element * /main/LATEST
+
+Merging to the release1 integration branch:
+    element * CHECKEDOUT
+    element * .../release1/LATEST
+    mkbranch release1
+    element * /main/LATEST
+
+For Validation and Verification:
+    element * <label_name> 
+

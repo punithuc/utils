@@ -1,0 +1,53 @@
+#!/bin/bash
+
+clear
+
+DIR=$1
+
+if [ -d $DIR ]
+then
+    echo "In Directory $DIR"
+    
+    T_TOT=`grep "^texec_grp" $DIR/code/build/posix/st_fw_app/bin/*.tool | wc -l`
+    T_COMP=`grep "^Group" $DIR/code/build/posix/st_fw_app/bin/success*.txt \
+                                                                       | wc -l`
+    if [ -f $DIR/code/build/posix/st_fw_app/bin/fail.txt ]
+    then
+        FAIL=`grep "FAILED" $DIR/code/build/posix/st_fw_app/bin/fail*.txt | wc -l`
+    else
+        FAIL=`grep "FAILED" $DIR/code/build/posix/st_fw_app/bin/*.trp | wc -l`
+    fi
+
+    echo "  Total Test groups        : $T_TOT"
+    echo "  Test groups Completed    : `expr $T_COMP - 1`"
+    echo "  Test groups Remaining    : `expr $T_TOT - $T_COMP + 1`"
+    echo "  Test cases failed        : $FAIL"
+
+    if [ $FAIL -ne 0 ]
+    then
+        if [ $# -gt 1 ]
+        then
+            OPTION=$2
+        else
+            echo ""
+            echo "  Display Failed Test cases [y/n] : "
+            read OPTION
+        fi
+
+        case $OPTION in
+
+            [yY] | [yY][eE][sS])
+
+                echo ""
+                echo "  Failed Test cases are:"
+                sleep 1
+                grep -n -B 2 "FAILED" $DIR/code/build/posix/st_fw_app/bin/*.t[rx][pt] \
+                                                                          > fail.txt
+                cat fail.txt
+        esac
+    fi
+else
+    echo "$DIR directory doesnt exist"
+fi
+
+echo ""

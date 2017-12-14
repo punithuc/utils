@@ -1,0 +1,102 @@
+#!/bin/bash
+
+clear
+if [ $# -eq 0 ]
+then 
+    OPT=default
+else
+    OPT=$1
+fi
+
+if [ $# -gt 1 ]
+then
+    FILE=$2
+else
+    FILE=Makefile
+fi
+
+if [ $# -gt 2 ]
+then
+    MAKE_OPT=$3
+else
+    MAKE_OPT=all
+fi
+
+if [ -f $FILE ]
+then
+    echo "Making $FILE"
+
+    if [ $OPT = a ]
+    then
+        echo "";echo ""
+        echo "======================================"
+        echo "           Making ALL                 "
+        echo "======================================"
+        echo "";echo ""
+        make -f $FILE clean 2>cln
+        make -f $FILE depend 2>dep
+        make -f $FILE $MAKE_OPT 2>err
+        sleep 2
+
+        echo "";echo ""
+        echo "";
+        echo "======================================"
+        echo "            CLEAN                     "
+        echo "            warning                   "
+        grep "warning" cln
+        echo "            error                     "
+        grep "error" cln
+        echo "======================================"
+        echo "            DEPEND                    "
+        echo "            warning                   "
+        grep "warning" dep
+        echo "            error                     "
+        grep "error" dep
+        echo "======================================"
+        echo "            MAKE                      "
+        echo "            warning                   "
+        grep "warning" err
+        echo "            error                     "
+        grep "error" err
+        echo "        undefined reference           "
+        grep "undefined reference" err
+        echo "======================================"
+        echo "";echo "";echo ""
+
+
+    elif [ $OPT = c ]
+    then
+        echo "";echo ""
+        echo "======================================"
+        echo "          Cleaning ALL                "
+        echo "======================================"
+        echo "";echo ""
+        rm -rf cln dep err
+        make -f $FILE clean
+        echo "";echo ""
+    else
+        echo "";echo ""
+        echo "======================================"
+        echo "          Only Make                   "
+        echo "======================================"
+        echo "";echo ""
+        make -f $FILE $MAKE_OPT 2>err
+        sleep 2
+
+        echo "";echo ""
+        echo ""
+        echo "======================================"
+        echo "            MAKE                      "
+        echo "            warning                   "
+        grep "warning" err
+        echo "            error                     "
+        grep "error" err
+        echo "        undefined reference           "
+        grep "undefined reference" err
+        echo "======================================"
+        echo "";echo "";echo ""
+    fi
+else
+    echo "$FILE File doesnt exist"
+fi
+
